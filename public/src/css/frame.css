@@ -1,0 +1,13 @@
+#frame {
+    position: fixed;
+    top: 46px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 46px);
+    border: none;
+    display: none;
+    background: var(--bg);
+    color-scheme: light dark;
+}
+
+#frame.visible { display: block; }

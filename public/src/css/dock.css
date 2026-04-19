@@ -1,0 +1,49 @@
+#dock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    z-index: 20;
+    background: rgba(10, 11, 20, 0.78);
+    padding: 5px;
+    border-radius: 12px;
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--line);
+    transform: translate(-50%, 18px);
+    opacity: 0;
+    animation: dockIn 0.55s var(--ease) 0.22s forwards;
+}
+
+@keyframes dockIn {
+    from { transform: translate(-50%, 18px); opacity: 0; }
+    to   { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.dock-btn {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--fg-3);
+    transition: background 0.18s var(--ease), color 0.18s var(--ease), transform 0.18s var(--ease);
+    text-decoration: none;
+}
+
+.dock-btn:hover {
+    background: rgba(200, 195, 230, 0.06);
+    color: var(--fg);
+    transform: translateY(-1px);
+}
+
+.dock-btn:active { transform: translateY(0); }
+
+.dock-btn.active {
+    background: rgba(200, 195, 230, 0.08);
+    color: var(--accent);
+}
+
+.dock-btn svg { width: 16px; height: 16px; }

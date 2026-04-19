@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Nocturne</title>
+    <style>html,body{background:#05060d;color:#eae6ff;margin:0}</style>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%23c9c1ff'/><circle cx='22' cy='14' r='11' fill='%23050610'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/global.css">
+    <link rel="stylesheet" href="/src/css/home.css">
+    <link rel="stylesheet" href="/src/css/toolbar.css">
+    <link rel="stylesheet" href="/src/css/loader.css">
+    <link rel="stylesheet" href="/src/css/frame.css">
+    <link rel="stylesheet" href="/src/css/error.css">
+    <link rel="stylesheet" href="/src/css/dock.css">
+    <link rel="stylesheet" href="/src/css/settings.css">
+</head>
+<body>
+
+<canvas id="bgCanvas" class="visible"></canvas>
+
+<div id="app" class="visible">
+
+    <div id="homePage">
+        <h1 class="title">Nocturne</h1>
+
+        <form id="searchForm" class="search-wrap" autocomplete="off">
+            <svg class="search-icon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="7" cy="7" r="5"></circle>
+                <line x1="13" y1="13" x2="10.5" y2="10.5"></line>
+            </svg>
+            <input id="searchHome" class="search-field" placeholder="Search or enter a URL" autocomplete="off" spellcheck="false">
+        </form>
+
+        <div class="links">
+            <button class="link-btn" data-url="https://www.youtube.com">YouTube</button>
+            <button class="link-btn" data-url="https://discord.com/app">Discord</button>
+            <button class="link-btn" data-url="https://x.com">X</button>
+            <button class="link-btn" data-url="https://www.reddit.com">Reddit</button>
+            <button class="link-btn" data-url="https://github.com">GitHub</button>
+        </div>
+    </div>
+
+    <div id="toolbar">
+        <button class="tb-btn" id="btnBack" aria-label="Back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="tb-btn" id="btnFwd" aria-label="Forward">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button class="tb-btn" id="btnReload" aria-label="Reload">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+        </button>
+        <input id="urlBar" placeholder="Search or enter URL">
+        <button class="tb-btn" id="btnFullscreen" aria-label="Fullscreen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"/></svg>
+        </button>
+    </div>
+
+    <div id="lineLoader">
+        <div class="ll-bar"></div>
+        <div class="ll-meta">
+            <span class="ll-stage" id="llStage">connecting</span>
+            <span class="ll-sep">·</span>
+            <span class="ll-timer" id="llTimer">0.00s</span>
+        </div>
+    </div>
+
+    <iframe id="frame" title="Nocturne"></iframe>
+
+    <div id="errorPage">
+        <p class="err-title">Page unreachable</p>
+        <p class="err-desc" id="errDetail">The destination did not respond.</p>
+        <div class="err-actions">
+            <button class="err-btn" id="homeFromErrorBtn">Home</button>
+            <button class="err-btn primary" id="retryBtn">Retry</button>
+        </div>
+    </div>
+
+    <nav id="dock">
+        <button class="dock-btn" id="dockHome" aria-label="Home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2h-4v-6h-6v6H5a2 2 0 0 1-2-2z"/></svg>
+        </button>
+        <a class="dock-btn" href="/apps.html" aria-label="Apps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </a>
+        <a class="dock-btn" href="/code.html" aria-label="Editor">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></svg>
+        </a>
+        <button class="dock-btn" id="dockSettings" aria-label="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+    </nav>
+
+    <div id="settingsPanel">
+        <div class="cfg-group">
+            <div class="cfg-row">
+                <span>Ambient background</span>
+                <label class="toggle-wrap">
+                    <input type="checkbox" id="fxToggle" checked>
+                    <span class="toggle-track"></span>
+                </label>
+            </div>
+            <div class="cfg-row">
+                <span>Search engine</span>
+                <select id="engineSelect" class="cfg-select"></select>
+            </div>
+            <div class="cfg-row">
+                <span>Tab cloak</span>
+                <select id="cloakSelect" class="cfg-select"></select>
+            </div>
+            <div class="cfg-row">
+                <span>Debug overlay</span>
+                <label class="toggle-wrap">
+                    <input type="checkbox" id="debugToggle">
+                    <span class="toggle-track"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="cfg-group">
+            <div class="cfg-row cfg-row-actions">
+                <button class="cfg-btn" id="resetProxyBtn">Reset proxy</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/src/js/bg.js" defer></script>
+<script src="/src/js/debug.js" defer></script>
+<script type="module" src="/src/js/app.js"></script>
+
+</body>
+</html>
