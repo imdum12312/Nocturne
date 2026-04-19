@@ -1,0 +1,27 @@
+{
+  "name": "nocturne",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Nocturne — a midnight-themed web proxy built on Scramjet + Epoxy + Bare-Mux + Wisp.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "proxy",
+    "scramjet",
+    "epoxy",
+    "wisp",
+    "unblocker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mercuryworkshop/bare-mux": "^2.1.7",
+    "@mercuryworkshop/epoxy-transport": "^3.0.1",
+    "@mercuryworkshop/wisp-js": "^0.4.0",
+    "compression": "^1.8.1",
+    "express": "^5.1.0"
+  }
+}
