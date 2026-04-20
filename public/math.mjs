@@ -90,7 +90,7 @@ let _transportReady = Promise.resolve();
 
 if (window.self === window.top) {
     const wispProto = location.protocol === "https:" ? "wss:" : "ws:";
-    const wispUrl = wispProto + "//" + location.host + "/wisp/";
+    const wispUrl = wispProto + "//" + location.host + "/api/sync/";
 
     _transportReady = (async () => {
         const code = makeTransportCode();
